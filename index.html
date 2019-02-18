@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>JSON Sandbox</title>
+    </head>
+
+    <body>
+        <ul id="people"></ul>
+        <script>
+         /*
+            var person = {
+                name: "Brad",
+                age: 35,
+                address:{
+                    street: "1517 w taylor",
+                    city: "Phoenix"
+                },
+                dogs:["Kingsley", "Pavlov"]
+
+            }
+            //person= JSON.stringify(person);
+            //person= JSON.parse(person);
+
+            var people = [
+                {
+                    name: "Luke",
+                    age: 26
+                },
+                {
+                    name: "Alexandra",
+                    age: 22
+                },
+                {
+                    name: "Cosme",
+                    age: 55
+                }
+            ];
+
+            console.log(people[1].age);
+
+
+            var output= '';
+            for(var i=0; i<people.length; i++){
+                //console.log(people[i]);
+                output += '<li>'+people[i].name+'</li>';
+            }
+            document.getElementById('people').innerHTML=output;
+         */
+         var xhttp = new XMLHttpRequest(); //this pulls the info from the the json file
+            xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var response= JSON.parse(xhttp.responseText); //turns it into a js object
+                var people = response.people;
+
+                //console.log(response.people);
+                var output= '';
+            for(var i=0; i<people.length; i++){ //loops through array
+                //console.log(people[i]);
+                output += '<li>'+people[i].name+'</li>'; //turns into html to display
+            }
+            document.getElementById('people').innerHTML=output;
+                }
+            };
+            xhttp.open("GET", "people.json", true);
+            xhttp.send();
+
+        </script>
+
+    </body>
+
+</html>
